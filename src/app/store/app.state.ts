@@ -1,17 +1,17 @@
 import { CoreActions, coreReducer, CoreState } from './core'
-import { TableActions, tableReducer, TableState } from './table'
+import { TeamActions, teamReducer, TeamState } from './team'
 
 // all state properties must be initialized here in order to use storage persistance
 export class AppState {
   core = {} as CoreState
-  TABLE = {} as TableState
+  team = {} as TeamState
 }
 
 export const reducers = {
   core: coreReducer,
-  table: tableReducer,
+  team: teamReducer,
 }
 export const metaReducers = []
 export const effects = []
 
-export type AppActions = CoreActions | TableActions
+export type AppActions = CoreActions | TeamActions
