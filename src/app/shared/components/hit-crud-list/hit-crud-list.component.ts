@@ -6,7 +6,7 @@ import { NbMenuItem } from '@nebular/theme'
 import { Subject } from 'rxjs'
 import { HitInputComponent } from '../hit-input'
 import { CustomColumn, HitTableComponent, TableActionClick, TableColumn } from '../hit-table'
-import { CrudListTableData } from './models'
+import { CrudListTeam } from './models'
 
 @Component({
   selector: 'hit-crud-list',
@@ -21,7 +21,7 @@ export class HitCrudListComponent implements OnDestroy {
   @Input() tableColumns: TableColumn[] = []
   @Input() customColumns: CustomColumn[] = []
   @Input() tableActions: NbMenuItem[]
-  @Input() data: CrudListTableData<any> = []
+  @Input() data: CrudListTeam<any> = []
 
   @Input() createEntityRoute = ''
   @Input() loading = false

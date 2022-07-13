@@ -1,16 +1,16 @@
-import { TableData } from '@core/models'
+import { Team } from '@core/models'
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity'
 import moment from 'moment'
 
-export interface TableState extends EntityState<TableData> {
+export interface TableState extends EntityState<Team> {
   loading: boolean
   error: any
-  current: TableData | null
+  current: Team | null
 }
 
-export const adapter: EntityAdapter<TableData> = createEntityAdapter<TableData>({
+export const adapter: EntityAdapter<Team> = createEntityAdapter<Team>({
   // sortComparer: sortByCreatedAt,
-  selectId: (data: TableData) => data.time.time_id,
+  selectId: (data: Team) => data.time.time_id,
 })
 
 export const initialState: TableState = adapter.getInitialState({

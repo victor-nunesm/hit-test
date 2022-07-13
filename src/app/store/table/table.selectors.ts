@@ -1,4 +1,4 @@
-import { TableData } from '@core/models'
+import { Team } from '@core/models'
 import { EntityState } from '@ngrx/entity'
 import { createFeatureSelector, createSelector } from '@ngrx/store'
 import { STORE_FEATURES } from '@store/store-features'
@@ -10,8 +10,8 @@ const {
   selectAll: _selectAll,
   selectIds: _selectIds,
 } = adapter.getSelectors()
-const _getCurrentId = (state: TableState) => (state.current as TableData)?.time.time_id
-const _getIds = (state: EntityState<TableData>) => {
+const _getCurrentId = (state: TableState) => (state.current as Team)?.time.time_id
+const _getIds = (state: EntityState<Team>) => {
   const ids: number[] = []
   for (const table in state.entities) {
     if (Object.prototype.hasOwnProperty.call(state.entities, table)) {
@@ -22,7 +22,7 @@ const _getIds = (state: EntityState<TableData>) => {
 
   return ids
 }
-const _getCurrent = (state: TableState) => state.current as TableData
+const _getCurrent = (state: TableState) => state.current as Team
 const _getLoadingState = (state: TableState) => state.loading as boolean
 
 export const selectModuleState = createFeatureSelector<TableState>(STORE_FEATURES.TABLE)

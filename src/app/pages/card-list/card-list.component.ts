@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
-import { TableData } from '@core/models'
+import { Team } from '@core/models'
 import { map, Observable, startWith } from 'rxjs'
 
 @Component({
@@ -10,8 +10,8 @@ import { map, Observable, startWith } from 'rxjs'
   styleUrls: ['./card-list.component.scss'],
 })
 export class CardListComponent implements OnInit {
-  data$: Observable<TableData[]>
-  rawData: TableData[]
+  data$: Observable<Team[]>
+  rawData: Team[]
 
   backCardBodyData = [
     {
@@ -58,30 +58,27 @@ export class CardListComponent implements OnInit {
     {
       name: 'name',
       defaultValue: '',
-      function: (name: string) => (value: TableData) =>
-        value.time.nome_popular.toLowerCase().includes(name.toLowerCase()),
+      function: (name: string) => (value: Team) => value.time.nome_popular.toLowerCase().includes(name.toLowerCase()),
     },
     {
       name: 'use',
       defaultValue: '',
-      function: (use: number) => (value: TableData) => value.aproveitamento >= use,
+      function: (use: number) => (value: Team) => value.aproveitamento >= use,
     },
     {
       name: 'balance',
       defaultValue: '',
-      function: (balance: number) => (value: TableData) => value.saldo_gols >= balance,
+      function: (balance: number) => (value: Team) => value.saldo_gols >= balance,
     },
     {
       name: 'wonLastGame',
       defaultValue: false,
-      function: (paramNotUsed: any) => (value: TableData) =>
-        (value.ultimos_jogos[0] ? value.ultimos_jogos[0] : 'e') === 'v',
+      function: (paramNotUsed: any) => (value: Team) => (value.ultimos_jogos[0] ? value.ultimos_jogos[0] : 'e') === 'v',
     },
     {
       name: 'lostLastGame',
       defaultValue: false,
-      function: (paramNotUsed: any) => (value: TableData) =>
-        (value.ultimos_jogos[0] ? value.ultimos_jogos[0] : 'e') === 'd',
+      function: (paramNotUsed: any) => (value: Team) => (value.ultimos_jogos[0] ? value.ultimos_jogos[0] : 'e') === 'd',
     },
   ]
 
@@ -116,7 +113,7 @@ export class CardListComponent implements OnInit {
     return this.filtersForm.valueChanges.pipe(
       startWith(this.filtersForm.value),
       map((formValue: Record<string, any>) => {
-        const filteredData: TableData[] = []
+        const filteredData: Team[] = []
         this.hasFilter = false
 
         for (const filterName in formValue) {
@@ -125,14 +122,13 @@ export class CardListComponent implements OnInit {
             if (filterValue) {
               this.hasFilter = true
               filteredData.push(
-                ...(this.rawData.filter(this.getMapOfFiltersFunctions()[filterName](filterValue)) ||
-                  ([] as TableData[]))
+                ...(this.rawData.filter(this.getMapOfFiltersFunctions()[filterName](filterValue)) || ([] as Team[]))
               )
             }
           }
         }
 
-        return this.removeDuplicatesFromArray<TableData>(this.hasFilter ? filteredData : this.rawData)
+        return this.removeDuplicatesFromArray<Team>(this.hasFilter ? filteredData : this.rawData)
       })
     )
   }

@@ -13,13 +13,13 @@ import {
 } from '@angular/core'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
-import { MatTable, MatTableDataSource } from '@angular/material/table'
+import { MatTable, MatTeamSource } from '@angular/material/table'
 import { BasePagination } from '@core/models'
 import { NbMenuItem, NbMenuService } from '@nebular/theme'
 import { CoreStateService } from '@store/core'
 import { BehaviorSubject, debounceTime, Subject } from 'rxjs'
 import { filter, takeUntil } from 'rxjs/operators'
-import { CrudListTableData } from '../hit-crud-list'
+import { CrudListTeam } from '../hit-crud-list'
 import { CustomColumn, TableActionClick, TableColumn } from './models'
 
 @Component({
@@ -28,7 +28,7 @@ import { CustomColumn, TableActionClick, TableColumn } from './models'
   styleUrls: ['./hit-table.component.scss'],
 })
 export class HitTableComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
-  @Input('data') data: CrudListTableData<any>
+  @Input('data') data: CrudListTeam<any>
   @Input('paginated') paginated: boolean = false
   @Input('columns') columns: TableColumn[]
   @Input('actions') actions: NbMenuItem[]
@@ -56,7 +56,7 @@ export class HitTableComponent implements OnInit, OnDestroy, AfterViewInit, OnCh
 
   private unsubscribe$ = new Subject()
   private initialLoad = true
-  dataSource: MatTableDataSource<any> = new MatTableDataSource()
+  dataSource: MatTeamSource<any> = new MatTeamSource()
   columnsNames: string[]
   _columns: TableColumn[]
   actionsColumnKey = 'ACTIONS_COLUMN'
