@@ -53,17 +53,41 @@ export class CardListComponent implements OnInit {
   ]
   filtersForm: FormGroup
   hasFilter: boolean
+  filters = [
+    {
+      name: 'name',
+      defaultValue: '',
+      function: (name: string) => (value: TableData) =>
+        value.time.nome_popular.toLowerCase().includes(name.toLowerCase()),
+    },
+    {
+      name: 'use',
+      defaultValue: '',
+      function: (use: number) => (value: TableData) => value.aproveitamento >= use,
+    },
+    {
+      name: 'balance',
+      defaultValue: '',
+      function: (balance: number) => (value: TableData) => value.saldo_gols >= balance,
+    },
+    {
+      name: 'wonLastGame',
+      defaultValue: false,
+      function: (paramNotUsed: any) => (value: TableData) =>
+        (value.ultimos_jogos[0] ? value.ultimos_jogos[0] : 'e') === 'v',
+    },
+    {
+      name: 'lostLastGame',
+      defaultValue: false,
+      function: (paramNotUsed: any) => (value: TableData) =>
+        (value.ultimos_jogos[0] ? value.ultimos_jogos[0] : 'e') === 'd',
+    },
+  ]
 
   constructor(private service: TableService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.filtersForm = this.fb.group({
-      name: [''],
-      use: [''],
-      balance: [''],
-      wonLastGame: [false],
-      lostLastGame: [false],
-    })
+    this.filtersForm = this.createFiltersFormGroup()
     this.data$ = this.getFilteredData$()
   }
 
@@ -82,56 +106,47 @@ export class CardListComponent implements OnInit {
     this.filtersForm.get('lostLastGame')?.setValue(!currValue)
   }
 
+  private createFiltersFormGroup() {
+    return this.fb.group(this.getMapOfFormControlsDefaults())
+  }
+
   private getFilteredData$() {
     return this.filtersForm.valueChanges.pipe(
       startWith(this.filtersForm.value),
-      switchMap((value) => {
+      switchMap((formValue) => {
         return this.service.getAll().pipe(
-          map((data) => {
-            const filters = this.getFiltersObject()
-            let _data: TableData[] = []
-            let hasFilter = value.name || value.balance || value.use || value.wonLastGame || value.lostLastGame
+          map((jsonResponseData) => {
+            const filteredData: TableData[] = []
 
-            for (const filterValName in value) {
-              if (Object.prototype.hasOwnProperty.call(value, filterValName)) {
-                const filterVal = value[filterValName]
-                if (filterVal) {
-                  _data.push(...(data.filter(filters[filterValName](value[filterValName])) || ([] as TableData[])))
+            for (const filterName in formValue) {
+              if (Object.prototype.hasOwnProperty.call(formValue, filterName)) {
+                const filterValue = formValue[filterName]
+                if (filterValue) {
+                  this.hasFilter = true
+                  filteredData.push(
+                    ...(jsonResponseData.filter(this.getMapOfFiltersFunctions()[filterName](filterValue)) ||
+                      ([] as TableData[]))
+                  )
                 }
               }
             }
 
-            this.hasFilter = hasFilter
-            return [...new Set(hasFilter ? _data : data)]
+            return this.removeDuplicatesFromArray(this.hasFilter ? filteredData : jsonResponseData)
           })
         )
       })
     )
   }
 
-  private getFiltersObject() {
-    return {
-      name: this.filterDataByName,
-      use: this.filterDataByUse,
-      balance: this.filterDataByBalance,
-      wonLastGame: this.filterDataByWonLastGame,
-      lostLastGame: this.filterDataByLostLastGame,
-    }
+  private removeDuplicatesFromArray(array: any[]) {
+    return [...new Set(array)]
   }
 
-  private filterDataByName(name: string) {
-    return (value: TableData) => value.time.nome_popular.toLowerCase().includes(name.toLowerCase())
+  private getMapOfFormControlsDefaults() {
+    return this.filters.reduce((acc, curr) => ({ ...acc, [curr.name]: [curr.defaultValue] }), {})
   }
-  private filterDataByUse(use: number) {
-    return (value: TableData) => value.aproveitamento >= use
-  }
-  private filterDataByBalance(balance: number) {
-    return (value: TableData) => value.saldo_gols >= balance
-  }
-  private filterDataByWonLastGame(paramNotUsed: any) {
-    return (value: TableData) => (value.ultimos_jogos[0] ? value.ultimos_jogos[0] : 'e') === 'v'
-  }
-  private filterDataByLostLastGame(paramNotUsed: any) {
-    return (value: TableData) => (value.ultimos_jogos[0] ? value.ultimos_jogos[0] : 'e') === 'e'
+
+  private getMapOfFiltersFunctions() {
+    return this.filters.reduce((acc, curr) => ({ ...acc, [curr.name]: curr.function }), {})
   }
 }
