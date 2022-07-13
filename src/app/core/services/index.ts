@@ -1,5 +1,6 @@
 export * from './api.service'
 export * from './auth.service'
 export * from './csv-data.service'
+export * from './data.service'
 export * from './localstorage.service'
 export * from './user.service'

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { ActivatedRoute } from '@angular/router'
 import { TableData } from '@core/models'
-import { TableService } from '@pages/table/table.service'
-import { map, Observable, startWith, switchMap } from 'rxjs'
+import { map, Observable, startWith } from 'rxjs'
 
 @Component({
   selector: 'app-card-list',
@@ -11,6 +11,7 @@ import { map, Observable, startWith, switchMap } from 'rxjs'
 })
 export class CardListComponent implements OnInit {
   data$: Observable<TableData[]>
+  rawData: TableData[]
 
   backCardBodyData = [
     {
@@ -84,10 +85,11 @@ export class CardListComponent implements OnInit {
     },
   ]
 
-  constructor(private service: TableService, private fb: FormBuilder) {}
+  constructor(private route: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.filtersForm = this.createFiltersFormGroup()
+    this.rawData = this.route.snapshot.data['data']
     this.data$ = this.getFilteredData$()
   }
 
@@ -113,33 +115,30 @@ export class CardListComponent implements OnInit {
   private getFilteredData$() {
     return this.filtersForm.valueChanges.pipe(
       startWith(this.filtersForm.value),
-      switchMap((formValue) => {
-        return this.service.getAll().pipe(
-          map((jsonResponseData) => {
-            const filteredData: TableData[] = []
+      map((formValue: Record<string, any>) => {
+        const filteredData: TableData[] = []
+        this.hasFilter = false
 
-            for (const filterName in formValue) {
-              if (Object.prototype.hasOwnProperty.call(formValue, filterName)) {
-                const filterValue = formValue[filterName]
-                if (filterValue) {
-                  this.hasFilter = true
-                  filteredData.push(
-                    ...(jsonResponseData.filter(this.getMapOfFiltersFunctions()[filterName](filterValue)) ||
-                      ([] as TableData[]))
-                  )
-                }
-              }
+        for (const filterName in formValue) {
+          if (Object.prototype.hasOwnProperty.call(formValue, filterName)) {
+            const filterValue = formValue[filterName]
+            if (filterValue) {
+              this.hasFilter = true
+              filteredData.push(
+                ...(this.rawData.filter(this.getMapOfFiltersFunctions()[filterName](filterValue)) ||
+                  ([] as TableData[]))
+              )
             }
+          }
+        }
 
-            return this.removeDuplicatesFromArray(this.hasFilter ? filteredData : jsonResponseData)
-          })
-        )
+        return this.removeDuplicatesFromArray<TableData>(this.hasFilter ? filteredData : this.rawData)
       })
     )
   }
 
-  private removeDuplicatesFromArray(array: any[]) {
-    return [...new Set(array)]
+  private removeDuplicatesFromArray<T>(array: T[]) {
+    return [...new Set(array)] as T[]
   }
 
   private getMapOfFormControlsDefaults() {
