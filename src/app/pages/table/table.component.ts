@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { assignMenuActionId } from '@shared/components'
 import { HitCrudListComponent } from '@shared/components/hit-crud-list/hit-crud-list.component'
-import { TableStateService } from '@store/table'
 import { TABLE_ACTIONS, TABLE_COLUMNS } from './constants'
 
 @Component({
@@ -16,7 +15,7 @@ export class TableComponent extends HitCrudListComponent implements OnInit {
   override tableColumns = TABLE_COLUMNS
   override tableActions = assignMenuActionId(TABLE_ACTIONS)
 
-  constructor(private state: TableStateService, override route: ActivatedRoute, override router: Router) {
+  constructor(override route: ActivatedRoute, override router: Router) {
     super(router, route)
   }
 

@@ -1,4 +1,4 @@
-export interface TableData {
+export interface Team {
   posicao: number
   pontos: number
   time: Time

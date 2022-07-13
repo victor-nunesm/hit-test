@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store'
-import * as ACTIONS from './table.actions'
-import { adapter, initialState, TableState } from './table.state'
+import * as ACTIONS from './team.actions'
+import { adapter, initialState, TeamState } from './team.state'
 
 const _saleReducer = createReducer(
   initialState,
@@ -57,10 +57,10 @@ const _saleReducer = createReducer(
   })
 )
 
-export function tableReducer(state: TableState | undefined, action: Action) {
+export function teamReducer(state: TeamState | undefined, action: Action) {
   return _saleReducer(state, action)
 }
 
-const setLoading = (state: TableState, loading: boolean) => {
+const setLoading = (state: TeamState, loading: boolean) => {
   return { ...state, loading }
 }

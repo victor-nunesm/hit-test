@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core'
-import { TableData } from '@core/models'
+import { Team } from '@core/models'
 import { ApiService } from '@core/services'
-import { TableStateService } from '@store/table'
+import { TeamStateService } from '@store/team'
 import { map, take } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  constructor(private state: TableStateService, private api: ApiService) {}
+  constructor(private state: TeamStateService, private api: ApiService) {}
 
   getAll() {
-    return this.api.get<TableData[]>('assets/json/backend-classification.json').pipe(
+    return this.api.get<Team[]>('assets/json/backend-classification.json').pipe(
       take(1),
       map((data) => {
         const _data = data.map((x) => ({

@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core'
-import { TableData } from '@core/models'
+import { Team } from '@core/models'
 import { Dictionary } from '@ngrx/entity'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
-import * as actions from './table.actions'
-import * as selectors from './table.selectors'
-import { TableState } from './table.state'
+import * as actions from './team.actions'
+import * as selectors from './team.selectors'
+import { TeamState } from './team.state'
 
 @Injectable({ providedIn: 'root' })
-export class TableStateService {
+export class TeamStateService {
   SELECTORS = selectors
   ACTIONS = actions
-  constructor(private _store: Store<TableState>) {}
+  constructor(private _store: Store<TeamState>) {}
 
   get store() {
     return this._store
   }
 
   // Selectors
-  getState(): Observable<TableState> {
+  getState(): Observable<TeamState> {
     return this.store.select(selectors.selectState)
   }
 
-  getAll(): Observable<TableData[]> {
+  getAll(): Observable<Team[]> {
     return this.store.select(selectors.selectAll)
   }
 
-  getCurrent(): Observable<TableData> {
+  getCurrent(): Observable<Team> {
     return this.store.select(selectors.selectCurrent)
   }
 
-  getEntities(): Observable<Dictionary<TableData>> {
+  getEntities(): Observable<Dictionary<Team>> {
     return this.store.select(selectors.selectEntities)
   }
 
@@ -39,11 +39,11 @@ export class TableStateService {
   }
 
   // Actions
-  add(entity: TableData) {
+  add(entity: Team) {
     this.store.dispatch(actions.addOne({ payload: entity }))
   }
 
-  delete(entity: TableData) {
+  delete(entity: Team) {
     this.store.dispatch(actions.deleteOne({ payload: entity.time.time_id }))
   }
 
@@ -51,23 +51,23 @@ export class TableStateService {
     this.store.dispatch(actions.removeCurrent())
   }
 
-  setCurrent(entity: TableData) {
+  setCurrent(entity: Team) {
     return this.store.dispatch(actions.setCurrent({ payload: entity }))
   }
 
-  update(entity: TableData) {
+  update(entity: Team) {
     return this.store.dispatch(actions.updateOne({ payload: { id: entity.time.time_id, changes: entity } }))
   }
 
-  upsertOne(entity: TableData) {
+  upsertOne(entity: Team) {
     return this.store.dispatch(actions.upsertOne({ payload: entity }))
   }
 
-  load(entities: TableData[]) {
+  load(entities: Team[]) {
     return this.store.dispatch(actions.load({ payload: entities }))
   }
 
-  upsertMany(entities: TableData[]) {
+  upsertMany(entities: Team[]) {
     return this.store.dispatch(actions.upsertMany({ payload: entities }))
   }
 
