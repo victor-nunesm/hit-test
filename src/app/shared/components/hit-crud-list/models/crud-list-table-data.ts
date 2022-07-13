@@ -3,4 +3,4 @@ export interface CrudListPaginatedData<T> {
   entities: T[]
 }
 
-export type CrudListTeam<T> = T[] | CrudListPaginatedData<T>
+export type CrudListTableData<T> = T[] | CrudListPaginatedData<T>

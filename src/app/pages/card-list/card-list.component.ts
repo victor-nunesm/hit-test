@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
 import { Team } from '@core/models'
 import { map, Observable, startWith } from 'rxjs'
+import { CardListFilter } from './models'
 
 @Component({
   selector: 'app-card-list',
@@ -13,7 +14,7 @@ export class CardListComponent implements OnInit {
   data$: Observable<Team[]>
   rawData: Team[]
 
-  backCardBodyData = [
+  backCardBodyData: CardListFilter[] = [
     {
       label: 'Pontos',
       path: 'pontos',

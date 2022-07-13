@@ -3,22 +3,22 @@ import { Team } from '@core/models'
 import { Dictionary } from '@ngrx/entity'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
-import * as actions from './table.actions'
-import * as selectors from './table.selectors'
-import { TableState } from './table.state'
+import * as actions from './team.actions'
+import * as selectors from './team.selectors'
+import { TeamState } from './team.state'
 
 @Injectable({ providedIn: 'root' })
-export class TableStateService {
+export class TeamStateService {
   SELECTORS = selectors
   ACTIONS = actions
-  constructor(private _store: Store<TableState>) {}
+  constructor(private _store: Store<TeamState>) {}
 
   get store() {
     return this._store
   }
 
   // Selectors
-  getState(): Observable<TableState> {
+  getState(): Observable<TeamState> {
     return this.store.select(selectors.selectState)
   }
 

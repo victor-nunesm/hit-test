@@ -2,7 +2,7 @@ import { Team } from '@core/models'
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity'
 import moment from 'moment'
 
-export interface TableState extends EntityState<Team> {
+export interface TeamState extends EntityState<Team> {
   loading: boolean
   error: any
   current: Team | null
@@ -13,7 +13,7 @@ export const adapter: EntityAdapter<Team> = createEntityAdapter<Team>({
   selectId: (data: Team) => data.time.time_id,
 })
 
-export const initialState: TableState = adapter.getInitialState({
+export const initialState: TeamState = adapter.getInitialState({
   loading: false,
   error: null,
   current: null,
