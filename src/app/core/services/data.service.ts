@@ -7,7 +7,7 @@ import { map, take } from 'rxjs'
 @Injectable({
   providedIn: 'root',
 })
-export class TableService {
+export class DataService {
   constructor(private state: TableStateService, private api: ApiService) {}
 
   getAll() {
