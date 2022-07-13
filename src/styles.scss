@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'app/theme/main';
+
+.img-container {
+  display: flex;
+  width: 100%;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.base-dialog {
+  width: 50vw;
+}
+
+label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.generic-report-modal {
+  width: 90vw;
+  max-width: 1000px;
+}
+
+@media screen and (max-width: 768px) {
+  .base-dialog {
+    width: 100%;
+    max-height: 100vh;
+  }
+}

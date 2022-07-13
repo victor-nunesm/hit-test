@@ -1,0 +1,8 @@
+@use 'themes' as *;
+
+@use '@nebular/theme/styles/globals' as *;
+@import 'normalize';
+
+@include nb-install() {
+  @include nb-theme-global();
+} ;

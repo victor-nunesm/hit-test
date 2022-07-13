@@ -16,12 +16,22 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "noImplicitAny": false,
+    "strictPropertyInitialization": false,
+    "target": "es2017",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ]
+    "lib": ["es2020", "dom"],
+    "typeRoots": ["./@types", "./node_modules/@types"],
+    "paths": {
+      "@core/*": ["src/app/core/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@store/*": ["src/app/store/*"],
+      "@layout/*": ["src/app/layout/*"],
+      "@pages/*": ["src/app/pages/*"],
+      "@environments/*": ["src/environments/*"]
+    },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

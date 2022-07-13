@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <nb-card [formGroup]="filtersForm">
+        <nb-card-body class="filters_grid">
+          <div class="filters_grid-header">
+            <h6 class="m-0">Filtros</h6>
+            <button nbButton ghost status="danger" size="small" (click)="clearFilters()">Limpar Tudo</button>
+          </div>
+          <div class="filters_grid-body">
+            <hit-input
+              type="text"
+              placeholder="Nome do time"
+              formControlName="name"
+              [suffixIcon]="'shield-outline'"
+              [suffixIconStatus]="'danger'"
+            ></hit-input>
+            <hit-input
+              type="number"
+              placeholder="Aproveitamento acima de...%"
+              formControlName="use"
+              [suffixIcon]="'percent-outline'"
+              [suffixIconStatus]="'danger'"
+            ></hit-input>
+            <hit-input
+              type="number"
+              placeholder="Saldo de gols acima de..."
+              formControlName="balance"
+              [suffixIcon]="'trending-up-outline'"
+              [suffixIconStatus]="'danger'"
+            ></hit-input>
+
+            <nb-button-group>
+              <button
+                nbButtonToggle
+                [pressed]="filtersForm.controls['wonLastGame'].value"
+                (click)="wonLastGameChange()"
+              >
+                Venceu o último jogo
+              </button>
+              <button
+                nbButtonToggle
+                [pressed]="filtersForm.controls['lostLastGame'].value"
+                (click)="lostLastGameChange()"
+              >
+                Perdeu o último jogo
+              </button>
+            </nb-button-group>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ng-container *ngTemplateOutlet="cardsGrid; context: { data: data$ | async }"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #cardsGrid let-data="data">
+  <h6 *ngIf="hasFilter">Mostrando {{ data.length }} resultados</h6>
+  <div class="cards_grid">
+    <nb-reveal-card class="cards_grid-item" *ngFor="let item of data">
+      <nb-card-front class="cards_grid-item-front">
+        <nb-card>
+          <nb-card-header>
+            <h6>{{ item.time.nome_popular }}</h6>
+            <span>Posição: {{ item.posicao }}º</span>
+          </nb-card-header>
+          <nb-card-body>
+            <img class="cards_grid-item-front-team_logo" [src]="item.time.escudo" />
+          </nb-card-body>
+        </nb-card>
+      </nb-card-front>
+      <nb-card-back class="cards_grid-item-back">
+        <nb-card status="info">
+          <nb-card-header>Informações adicionais</nb-card-header>
+          <nb-card-body>
+            <p *ngFor="let data of backCardBodyData">
+              <b>{{ data.label }}:</b> {{ item | accessNestedPropertyOfObject: data['path']
+              }}{{ data.suffix ? data.suffix : '' }}
+            </p>
+          </nb-card-body>
+        </nb-card>
+      </nb-card-back>
+    </nb-reveal-card>
+  </div>
+</ng-template>

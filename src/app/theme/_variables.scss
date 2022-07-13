@@ -1,0 +1,192 @@
+// $yellow: #fcdc04;
+// $dark-yellow: #978200;
+// $purple: #ac54cc;
+// $dark-purple: #6c3483;
+// $light-purple: #cdadcd;
+// $blue: #1e55fa;
+// $light-blue: #3d69f0;
+$cultured: #f9f8f8;
+$yale-blue: #04428b;
+$space-cadet: #26283c;
+$orange-red: rgb(243, 98, 26);
+$honey-yellow: #f5ad2f;
+
+:root {
+  --hit-text-color: var(--basic-color-900);
+  --hit-shadow: 0 0.5rem 1rem 0 rgb(25, 30, 51, 8%);
+  --hit-card-shadow: var(--hit-shadow);
+
+  // --hit-sidebar-background-color: linear-gradient(150deg, rgb(31 1 111), rgb(142 6 172));
+  --hit-sidebar-background-color: linear-gradient(-200deg, rgb(38, 40, 60), rgb(243, 98, 26));
+
+  --hit-menu-text-color: var(--basic-color-700);
+  --hit-menu-text-font-size: 0.8325rem;
+  --hit-menu-item-active-text-color: var(--basic-color-100);
+  --hit-menu-item-hover-text-color: var(--basic-color-500);
+  --hit-menu-item-divider-color: var(--basic-color-800);
+
+  --hit-input-danger-text-color: rgb(240, 26, 83);
+  --hit-input-basic-border-color: var(--basic-color-600);
+  --hit-input-basic-hover-border-color: var(--basic-color-800);
+
+  --basic-color-100: rgb(255, 255, 255);
+  --basic-color-200: rgb(251, 252, 253);
+  --basic-color-300: rgb(248, 249, 252);
+  --basic-color-400: rgb(239, 242, 250);
+  --basic-color-500: rgb(234, 238, 251);
+  --basic-color-600: rgb(172, 179, 200);
+  --basic-color-700: rgb(133, 140, 163);
+  --basic-color-800: rgb(83, 89, 106);
+  --basic-color-900: rgb(55, 60, 72);
+
+  --primary-color-100: rgb(255 255 255);
+  --primary-color-200: rgb(255, 224, 208);
+  --primary-color-300: rgb(255, 175, 136);
+  --primary-color-400: rgb(255, 138, 80);
+  --primary-color-500: rgb(243, 98, 26);
+  $primary-color-500: rgb(243, 98, 26);
+  --primary-color-600: rgb(222, 89, 22);
+  --primary-color-700: rgb(144, 63, 22);
+  --primary-color-800: rgb(81, 34, 11);
+  --primary-color-900: rgb(34, 13, 43);
+  --primary-transparent-color-100: rgb(167, 75, 243, 10%);
+  --primary-transparent-color-200: rgb(167, 58, 240, 20%);
+  --primary-transparent-color-300: rgb(160, 68, 235, 30%);
+  --primary-transparent-color-400: rgb(157, 51, 228, 40%);
+  --primary-transparent-color-500: rgb(156, 51, 255, 50%);
+  --primary-transparent-color-600: rgb(156, 51, 255, 60%);
+
+  --secondary-color-100: rgb(248 249 255);
+  --secondary-color-200: rgb(197, 212, 255);
+  --secondary-color-300: rgb(158, 182, 255);
+  --secondary-color-400: rgb(113, 149, 255);
+  --secondary-color-500: rgb(59, 104, 240);
+  --secondary-color-600: rgb(28, 83, 250);
+  --secondary-color-700: rgb(33, 65, 160);
+  --secondary-color-800: rgb(20, 46, 122);
+  --secondary-color-900: rgb(5, 20, 63);
+
+  --gradient-top: linear-gradient(
+    0deg,
+    rgb(172, 84, 204),
+    rgb(158, 84, 209),
+    rgb(141, 83, 213),
+    rgb(129, 84, 218),
+    rgb(114, 84, 222),
+    rgb(100, 84, 227),
+    rgb(86, 83, 232),
+    rgb(71, 83, 236),
+    rgb(57, 83, 241),
+    rgb(42, 83, 245),
+    rgb(28, 83, 250)
+  );
+  --gradient-right: linear-gradient(
+    90deg,
+    rgb(172, 84, 204),
+    rgb(158, 84, 209),
+    rgb(143, 84, 213),
+    rgb(129, 84, 218),
+    rgb(114, 84, 222),
+    rgb(100, 84, 227),
+    rgb(86, 83, 232),
+    rgb(71, 83, 236),
+    rgb(57, 83, 241),
+    rgb(42, 83, 245),
+    rgb(28, 83, 250)
+  );
+
+  --gradient-bottom: linear-gradient(
+    180deg,
+    rgb(158, 84, 209),
+    rgb(143, 84, 213),
+    rgb(129, 84, 218),
+    rgb(114, 84, 222),
+    rgb(100, 84, 227),
+    rgb(86, 83, 232),
+    rgb(71, 83, 236),
+    rgb(57, 83, 241),
+    rgb(42, 83, 245),
+    rgb(28, 83, 250)
+  );
+  --gradient-left: linear-gradient(
+    270deg,
+    rgb(172, 84, 204),
+    rgb(158, 84, 209),
+    rgb(143, 84, 213),
+    rgb(129, 84, 218),
+    rgb(114, 84, 222),
+    rgb(100, 84, 227),
+    rgb(86, 83, 232),
+    rgb(71, 83, 236),
+    rgb(57, 83, 241),
+    rgb(42, 83, 245),
+    rgb(28, 83, 250)
+  );
+  --gradient-top-right: linear-gradient(
+    45deg,
+    rgb(172, 84, 204),
+    rgb(158, 84, 209),
+    rgb(143, 84, 213),
+    rgb(129, 84, 218),
+    rgb(114, 84, 222),
+    rgb(100, 84, 227),
+    rgb(86, 83, 232),
+    rgb(71, 83, 236),
+    rgb(57, 83, 241),
+    rgb(42, 83, 245),
+    rgb(28, 83, 250)
+  );
+  --gradient-bottom-right: linear-gradient(
+    135deg,
+    rgb(143, 84, 213),
+    rgb(129, 84, 218),
+    rgb(114, 84, 222),
+    rgb(100, 84, 227),
+    rgb(86, 83, 232),
+    rgb(71, 83, 236),
+    rgb(57, 83, 241),
+    rgb(42, 83, 245),
+    rgb(28, 83, 250)
+  );
+  --gradient-top-left: linear-gradient(
+    225deg,
+    rgb(172, 84, 204),
+    rgb(158, 84, 209),
+    rgb(143, 84, 213),
+    rgb(129, 84, 218),
+    rgb(114, 84, 222),
+    rgb(100, 84, 227),
+    rgb(86, 83, 232),
+    rgb(71, 83, 236),
+    rgb(57, 83, 241),
+    rgb(42, 83, 245),
+    rgb(28, 83, 250)
+  );
+  --gradient-bottom-left: linear-gradient(
+    315deg,
+    rgb(172, 84, 204),
+    rgb(158, 84, 209),
+    rgb(143, 84, 213),
+    rgb(129, 84, 218),
+    rgb(114, 84, 222),
+    rgb(100, 84, 227),
+    rgb(86, 83, 232),
+    rgb(71, 83, 236),
+    rgb(57, 83, 241),
+    rgb(42, 83, 245),
+    rgb(28, 83, 250)
+  );
+  --gradient-radial: radial-gradient(
+    rgb(172, 84, 204),
+    rgb(158, 84, 209),
+    rgb(143, 84, 213),
+    rgb(129, 84, 218),
+    rgb(114, 84, 222),
+    rgb(100, 84, 227),
+    rgb(86, 83, 232),
+    rgb(71, 83, 236),
+    rgb(57, 83, 241),
+    rgb(42, 83, 245),
+    rgb(28, 83, 250)
+  );
+}

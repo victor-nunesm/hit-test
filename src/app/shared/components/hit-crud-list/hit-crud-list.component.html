@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row" *ngIf="showHeader">
+    <div class="col-lg-1 col-md-2">
+      <button nbButton fullWidth status="primary" (click)="navigate([createEntityRoute])" *ngIf="createEntityRoute">
+        <nb-icon icon="plus-circle-outline"></nb-icon>
+      </button>
+    </div>
+    <div class="col-lg-3 col-md-4 ms-auto">
+      <hit-input [(ngModel)]="filterValue" suffixIcon="search-outline" [placeholder]="filterPlaceholder"></hit-input>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-12">
+      <hit-table
+        [data]="data"
+        [loading]="loading"
+        [paginated]="paginated"
+        [columns]="tableColumns"
+        [customColumns]="customColumns"
+        [actions]="tableActions"
+        [filter]="filterValue"
+        (actionOptionClicked)="actionOptionClicked.emit($event)"
+        (paginationChanged)="paginationChanged.emit($event)"
+      ></hit-table>
+    </div>
+  </div>
+</div>

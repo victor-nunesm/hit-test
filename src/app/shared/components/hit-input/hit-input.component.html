@@ -1,0 +1,64 @@
+<div class="hit-input-container">
+  <label *ngIf="label" for="">{{ label }}</label>
+  <nb-form-field
+    *ngIf="inputMode !== _inputMode.DATE"
+    [nbSpinner]="loading"
+    [nbSpinnerStatus]="spinnerStatus"
+    [nbSpinnerMessage]="spinnerMessage"
+    [nbSpinnerSize]="spinnerSize"
+  >
+    <nb-icon
+      *ngIf="prefixIcon"
+      nbPrefix
+      [icon]="prefixIcon"
+      [status]="
+        control && !control.pristine && control.errors ? 'danger' : prefixIconStatus ? prefixIconStatus : 'basic'
+      "
+    ></nb-icon>
+    <input
+      *ngIf="inputMode === _inputMode.GENERAL"
+      [(ngModel)]="value"
+      [disabled]="isDisabled || disabled"
+      fullWidth
+      nbInput
+      [type]="type"
+      [fieldSize]="fieldSize"
+      [shape]="shape"
+      [placeholder]="placeholder"
+      [readonly]="readonly"
+      [status]="control && !control.pristine && control.errors ? 'danger' : status ? status : 'basic'"
+      [mask]="mask"
+      [dropSpecialCharacters]="dropSpecialCharacters"
+      (ngModelChange)="onInput($event)"
+    />
+
+    <input
+      *ngIf="inputMode === _inputMode.CURRENCY"
+      [(ngModel)]="value"
+      [disabled]="isDisabled || disabled"
+      fullWidth
+      nbInput
+      [type]="'text'"
+      [fieldSize]="fieldSize"
+      [shape]="shape"
+      [placeholder]="placeholder"
+      [readonly]="readonly"
+      [status]="control && !control.pristine && control.errors ? 'danger' : status ? status : 'basic'"
+      currencyMask
+      [options]="currencyMaskConfig"
+      (ngModelChange)="onInput($event)"
+      inputmode="numeric"
+    />
+
+    <nb-icon
+      *ngIf="suffixIcon"
+      nbSuffix
+      [icon]="suffixIcon"
+      [status]="
+        control && !control.pristine && control.errors ? 'danger' : suffixIconStatus ? suffixIconStatus : 'basic'
+      "
+    ></nb-icon>
+  </nb-form-field>
+  <nb-calendar *ngIf="inputMode === _inputMode.DATE" [(date)]="value" (dateChange)="onInput($event)"></nb-calendar>
+  <hit-form-errors *ngIf="control && !control.pristine" [errors]="control.errors"></hit-form-errors>
+</div>

@@ -1,0 +1,50 @@
+@forward '@nebular/theme/styles/theming';
+@use '@nebular/theme/styles/theming' as *;
+@use '@nebular/theme/styles/themes/corporate';
+@use 'variables';
+@use 'components/index';
+
+$nb-themes: nb-register-theme(
+  (
+    color-primary-100: var(--primary-color-100),
+    color-primary-200: var(--primary-color-200),
+    color-primary-300: var(--primary-color-300),
+    color-primary-400: var(--primary-color-400),
+    color-primary-500: var(--primary-color-500),
+    color-primary-600: var(--primary-color-600),
+    color-primary-700: var(--primary-color-700),
+    color-primary-800: var(--primary-color-800),
+    color-primary-900: var(--primary-color-900),
+    color-primary-transparent-100: var(--primary-transparent-color-100),
+    color-primary-transparent-200: var(--primary-transparent-color-200),
+    color-primary-transparent-300: var(--primary-transparent-color-300),
+    color-primary-transparent-400: var(--primary-transparent-color-400),
+    color-primary-transparent-500: var(--primary-transparent-color-500),
+    color-primary-transparent-600: var(--primary-transparent-color-600),
+    color-basic-100: var(--basic-color-100),
+    color-basic-200: var(--basic-color-200),
+    color-basic-300: var(--basic-color-300),
+    color-basic-400: var(--basic-color-400),
+    color-basic-500: var(--basic-color-500),
+    color-basic-600: var(--basic-color-600),
+    color-basic-700: var(--basic-color-700),
+    color-basic-800: var(--basic-color-800),
+    color-basic-900: var(--basic-color-900),
+    font-family-primary: var(--default-font-family),
+    text-basic-color: var(--hit-text-color),
+    border-basic-color-2: var(--color-basic-800),
+    sidebar-background-color: var(--hit-sidebar-background-color),
+    menu-text-color: var(--hit-menu-text-color),
+    menu-item-active-text-color: var(--hit-menu-item-active-text-color),
+    menu-item-hover-text-color: var(--hit-menu-item-hover-text-color),
+    menu-item-divider-color: var(--hit-menu-item-divider-color),
+    menu-text-font-size: var(--hit-menu-text-font-size),
+    shadow: var(--hit-shadow),
+    card-shadow: var(--hit-card-shadow),
+    input-danger-text-color: var(--hit-input-danger-text-color),
+    input-basic-hover-border-color: var(--hit-input-basic-hover-border-color),
+    input-basic-border-color: var(--hit-input-basic-border-color),
+  ),
+  hit-theme,
+  corporate
+);

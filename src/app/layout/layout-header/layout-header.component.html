@@ -1,0 +1,118 @@
+<div class="row justify-content-between">
+  <div class="col-md-1 col-2">
+    <button
+      class="set-compact-btn"
+      nbButton
+      ghost
+      status="primary"
+      [attr.state]="state"
+      (click)="toggleCompactMenu.emit(true)"
+    >
+      <nb-icon icon="menu-outline"></nb-icon>
+    </button>
+  </div>
+  <div class="col-md-3 col d-flex justify-content-end">
+    <nb-user
+      size="large"
+      [name]="(user$ | async)?.name || ''"
+      [title]="'Apostador'"
+      [picture]="
+        'https://www.nj.com/resizer/zovGSasCaR41h_yUGYHXbVTQW2A=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/SJGKVE5UNVESVCW7BBOHKQCZVE.jpg'
+      "
+      [nbContextMenu]="menuItems"
+      [nbContextMenuTag]="userMenuTag"
+    >
+      <!-- badgeText="99+"
+      badgeStatus="success"
+      badgePosition="bottom right" -->
+    </nb-user>
+  </div>
+</div>
+
+<ng-template #profileModal>
+  <nb-card class="base-dialog">
+    <nb-card-header>
+      <div class="row justify-content-end">
+        <div class="col">
+          <span>Perfil</span>
+        </div>
+        <div class="col-2 text-end">
+          <button nbButton status="basic" (click)="profileModalRef?.close()">
+            <nb-icon icon="close-outline"></nb-icon>
+          </button>
+        </div>
+      </div>
+    </nb-card-header>
+    <nb-card-body *ngIf="profileForm" [formGroup]="profileForm">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <hit-input
+            formControlName="name"
+            [control]="profileForm.controls['name']"
+            label="Nome"
+            placeholder="Informe o seu nome"
+          ></hit-input>
+        </div>
+        <div class="col-md-6 mb-3">
+          <hit-input
+            formControlName="email"
+            [control]="profileForm.controls['email']"
+            label="E-mail"
+            placeholder="Informe o seu e-mail"
+          ></hit-input>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <hit-datepicker
+            formControlName="bornDate"
+            [control]="profileForm.controls['bornDate']"
+            label="Data de Nascimento"
+            placeholder="Informe o seu CPF"
+          ></hit-datepicker>
+        </div>
+        <div class="col-md-4 mb-3">
+          <hit-input
+            formControlName="phoneNumber"
+            [control]="profileForm.controls['phoneNumber']"
+            mask="(00) 0000-0000||(00) 0 0000-0000"
+            label="Telefone"
+            placeholder="Informe um número para contato"
+          ></hit-input>
+        </div>
+
+        <div class="col-md-6 mb-3" [formGroup]="passwordForm">
+          <hit-input
+            type="password"
+            formControlName="password"
+            [control]="passwordForm.controls['password']"
+            label="Nova Senha"
+            placeholder="Informe uma nova senha"
+          ></hit-input>
+        </div>
+        <div class="col-md-6 mb-3" [formGroup]="passwordForm">
+          <hit-input
+            type="password"
+            formControlName="passwordConfirm"
+            [control]="passwordForm.controls['passwordConfirm']"
+            label="Confirmação"
+            placeholder="Confirme a nova senha"
+          ></hit-input>
+        </div>
+      </div>
+      <div class="row justify-content-center my-5">
+        <div class="col-md-5 col-12 text-center">
+          <button
+            nbButton
+            fullWidth
+            status="primary"
+            (click)="submitProfileForm()"
+            [disabled]="!(hasValidForm$ | async) || (coreLoading$ | async)"
+          >
+            <nb-icon icon="flip-2-outline"></nb-icon>
+            ATUALIZAR
+          </button>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</ng-template>

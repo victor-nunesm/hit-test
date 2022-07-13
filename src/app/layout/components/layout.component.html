@@ -1,0 +1,54 @@
+<nb-layout>
+  <nb-layout-header subheader>
+    <app-layout-header
+      [state]="state"
+      (toggleCompactMenu)="toggleCompactMenu()"
+      style="width: 100%; height: 100%"
+    ></app-layout-header>
+  </nb-layout-header>
+
+  <nb-sidebar
+    left
+    [(state)]="state"
+    [responsive]="responsive"
+    [fixed]="isMobile"
+    [compactedBreakpoints]="compactedBreakpoints"
+    [collapsedBreakpoints]="collapsedBreakpoints"
+    [containerFixed]="false"
+  >
+    <ng-container [ngTemplateOutlet]="sidebarLogo"></ng-container>
+    <app-routes-menu (changeSidebarState)="handleRouteChange($event)"></app-routes-menu>
+  </nb-sidebar>
+
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+
+  <!-- <nb-layout-footer fixed>
+    <nb-layout-column>
+      <app-layout-footer></app-layout-footer>
+    </nb-layout-column>
+  </nb-layout-footer> -->
+</nb-layout>
+
+<ng-template #sidebarLogo let-color>
+  <div
+    class="img-container sidebar-logo mb-2"
+    routerLink="/"
+    [attr.state]="state"
+    [attr.viewport]="isMobile ? 'mobile' : 'desktop'"
+    style="position: relative"
+    [ngStyle]="{ height: state === 'compacted' || state === 'collapsed' ? '50px' : 'auto' }"
+  >
+    <!-- <img
+      src="assets/img/logo.png"
+      [ngClass]="state === 'compacted' || state === 'collapsed' ? '' : 'hidden-img'"
+      style="min-width: 50px; min-height: 50px; position: fixed; left: 0"
+    />
+    <img
+      src="assets/logo/logo.png"
+      [ngClass]="state === 'compacted' || state === 'collapsed' ? 'hidden-img' : ''"
+      style="min-width: 50px; min-height: 50px"
+    /> -->
+  </div>
+</ng-template>

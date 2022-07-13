@@ -1,0 +1,34 @@
+<hit-crud-list
+  [data]="data"
+  [loading]="loading"
+  [paginated]="paginated"
+  [showHeader]="false"
+  [filterValue]="filterValue"
+  [tableColumns]="tableColumns"
+  [createEntityRoute]="createEntityRoute"
+  [customColumns]="[
+    {
+      propertyName: 'time.sigla',
+      templateRef: siglaTpl
+    },
+    {
+      propertyName: 'time.escudo',
+      templateRef: escudoTpl
+    },
+    {
+      propertyName: 'aproveitamento',
+      templateRef: aproveitamentoTpl
+    }
+  ]"
+  (actionOptionClicked)="handleTableActionMenuItemClicked($event)"
+></hit-crud-list>
+
+<ng-template #escudoTpl let-data>
+  <img [src]="data.time.escudo" style="width: 60px; height: 60px; margin: 10px" />
+</ng-template>
+<ng-template #siglaTpl let-data>
+  <div style="margin: 10px">
+    {{ data.time.sigla }}
+  </div>
+</ng-template>
+<ng-template #aproveitamentoTpl let-data> {{ data.aproveitamento }}% </ng-template>

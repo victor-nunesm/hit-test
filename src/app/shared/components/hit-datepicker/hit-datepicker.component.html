@@ -1,0 +1,42 @@
+<div class="Hit-input-container">
+  <label *ngIf="label" for="">{{ label }}</label>
+  <nb-form-field
+    [nbSpinner]="loading"
+    [nbSpinnerStatus]="spinnerStatus"
+    [nbSpinnerMessage]="spinnerMessage"
+    [nbSpinnerSize]="spinnerSize"
+  >
+    <nb-icon
+      *ngIf="prefixIcon"
+      nbPrefix
+      [icon]="prefixIcon"
+      [status]="
+        control && !control.pristine && control.errors ? 'danger' : prefixIconStatus ? prefixIconStatus : 'basic'
+      "
+    ></nb-icon>
+    <input
+      [(ngModel)]="value"
+      fullWidth
+      nbInput
+      [nbDatepicker]="bornDatePicker"
+      [fieldSize]="fieldSize"
+      [shape]="shape"
+      [placeholder]="placeholder"
+      [readonly]="readonly"
+      [status]="control && !control.pristine && control.errors ? 'danger' : status ? status : 'basic'"
+      (ngModelChange)="inputChanged($event)"
+    />
+
+    <nb-datepicker #bornDatePicker (dateChange)="onInput($event)" [format]="format" [date]="value"></nb-datepicker>
+
+    <nb-icon
+      *ngIf="suffixIcon"
+      nbSuffix
+      [icon]="suffixIcon"
+      [status]="
+        control && !control.pristine && control.errors ? 'danger' : suffixIconStatus ? suffixIconStatus : 'basic'
+      "
+    ></nb-icon>
+  </nb-form-field>
+  <hit-form-errors *ngIf="control && !control.pristine" [errors]="control.errors"></hit-form-errors>
+</div>

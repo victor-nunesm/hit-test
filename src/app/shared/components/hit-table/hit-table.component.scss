@@ -1,0 +1,61 @@
+@import 'variables';
+
+.search-wrapper {
+  display: flex;
+  justify-content: flex-end;
+
+  .search {
+    max-width: 300px;
+    width: 100px;
+    transition-property: width;
+    transition-duration: 300ms;
+    transition-timing-function: ease;
+  }
+  .search[expand='true'] {
+    width: 300px;
+    nb-icon {
+      display: none;
+    }
+  }
+}
+
+.table-card {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  overflow-x: auto;
+
+  nb-card-body {
+    padding: 0;
+    min-width: 700px;
+  }
+
+  table {
+    // font-family: Roboto, 'Helvetica Neue', sans-serif;
+    min-width: 100%;
+  }
+  .mat-header-row {
+    background-color: var(--primary-color-500);
+    * {
+      color: white;
+    }
+  }
+}
+
+mat-paginator {
+  padding: 0 0.5rem;
+  margin: 0 1px;
+}
+
+:host::ng-deep {
+  .mat-sort-header-arrow * {
+    color: white !important;
+  }
+  .cdk-column-ACTIONS_COLUMN {
+    width: 60px;
+  }
+
+  nb-spinner {
+    z-index: 2;
+  }
+}
